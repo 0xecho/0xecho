@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Elias Amha</h1>
-<h3 align="center">Expert at Starting Projects, Inept at Finishing them</h3>
+<h3 align="center">Getting a hang of it just now...</h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=0xecho&label=Profile%20views&color=0e75b6&style=flat" alt="0xecho" /> </p>
 
