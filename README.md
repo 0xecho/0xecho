@@ -1,7 +1,7 @@
 <h1 align="center">Hi 👋, I'm Elias Amha</h1>
 <h3 align="center">Getting a hang of it just now...</h3>
 
-<p align="left"> <a href="https://twitter.com/0xecho" target="blank"><img src="https://img.shields.io/twitter/follow/0xecho?logo=twitter&style=for-the-badge" alt="0xecho" /></a> </p>
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=0xecho&label=Profile%20views&color=0e75b6&style=flat" alt="0xecho" /> </p><p align="left"> <a href="https://twitter.com/0xecho" target="blank"><img src="https://img.shields.io/twitter/follow/0xecho?logo=twitter&style=for-the-badge" alt="0xecho" /></a> </p>
 
 - 🔭 I’m currently working on [2048'er](https://github.com/0xecho/2048-er)
 
