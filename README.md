@@ -1,8 +1,6 @@
 <h1 align="center">Hi 👋, I'm Elias Amha</h1>
 <h3 align="center">Getting a hang of it just now...</h3>
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=0xecho&label=Profile%20views&color=0e75b6&style=flat" alt="0xecho" /> </p>
-
 <p align="left"> <a><img src="https://github-profile-trophy.vercel.app/?username=0xecho" alt="0xecho" /></a> </p>
 
 <p align="left"> <a href="https://twitter.com/0xecho" target="blank"><img src="https://img.shields.io/twitter/follow/0xecho?logo=twitter&style=for-the-badge" alt="0xecho" /></a> </p>
@@ -29,10 +27,5 @@
 <h3 align="left">Support:</h3>
 <p><a href="https://www.buymeacoffee.com/0xecho"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="0xecho" /></a></p><br><br>
 <hr>
-
-<p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=0xecho&show_icons=true&locale=en&layout=compact" alt="0xecho" /></p>
-
-<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=0xecho&show_icons=true&locale=en" alt="0xecho" /></p>
-
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=0xecho&" alt="0xecho" /></p>
 
