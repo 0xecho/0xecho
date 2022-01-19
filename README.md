@@ -3,7 +3,7 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=0xecho&label=Profile%20views&color=0e75b6&style=flat" alt="0xecho" /> </p><p align="left"> <a href="https://twitter.com/0xecho" target="blank"><img src="https://img.shields.io/twitter/follow/0xecho?logo=twitter&style=for-the-badge" alt="0xecho" /></a> </p>
 
-- 🔭 I’m currently working on [Toppicks](https://toppicks.proto-code.com/)
+- 🔭 I’m currently working on [Toppicks](https://toppicks.proto-code.com/), [Gridy](https://github.com/0xecho/gridy), [2048-er](https://github.com/0xecho/2048-er), [Color Sort Solver](https://github.com/0xecho/color_sort_solver) and [Meme Ranker](https://github.com/0xecho/meme_ranker).
 
 - 👯 I’m looking to collaborate on **any fun project**
 
