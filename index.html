@@ -442,7 +442,7 @@
                 }
             }
 
-            const lastMousePosition = {};
+            const lastPosition = {};
 
             function updateDirections(cursorX, cursorY) {
                 letters.forEach((letter) => {
@@ -567,7 +567,8 @@
                     interactionY = event.touches[0].clientY - rect.top;
                 }
 
-                lastPosition = { x: interactionX, y: interactionY };
+                lastPosition.x = interactionX;
+                lastPosition.y = interactionY;
             }
 
             container.addEventListener('mousemove', handleInteraction);
@@ -576,8 +577,8 @@
 
 
             function animate() {
-                if (lastMousePosition.x !== undefined && lastMousePosition.y !== undefined) {
-                    updateDirections(lastMousePosition.x, lastMousePosition.y);
+                if (lastPosition.x !== undefined && lastPosition.y !== undefined) {
+                    updateDirections(lastPosition.x, lastPosition.y);
                 } else {
                     updateDirections(size * cellSize / 2, size * cellSize / 2);
                 }
