@@ -1,1 +1,580 @@
-Bubbles
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            width: 100vw;
+        }
+
+        #wordSearchContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+        }
+
+        .letter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+        }
+
+        .word-box {
+            position: absolute;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            background-color: rgba(76, 175, 80, 0.1);
+            z-index: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .word-box:hover {
+            background-color: rgba(76, 175, 80, 0.3);
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        .word-box.back {
+            background-color: rgba(255, 0, 0, 0.1);
+            border-color: #f44336;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wordSearchContainer"></div>
+
+    <script>
+        function welcome() {
+            alert("Welcome to das portfolio! If you are reading this, you probably know what to do!.")
+        }
+        const pageGraph = {
+            "root": {
+                type: "render",
+                words: ["contact", "summary", "education", "skills", "projects", "cert's n awards", "movies", "0xecho", "elias's portfolio", "echo"],
+                children: {
+                    "echo": {
+                        type: "function",
+                        function: welcome
+                    },
+                    "0xecho": { type: "function", function: welcome },
+                    "elias's portfolio": { type: "function", function: welcome },
+                    "contact": {
+                        type: "render",
+                        words: ["name", "email", "location", "social"],
+                        children: {
+                            "name": { type: "link", url: "https://en.wikipedia.org/wiki/Elias" },
+                            "email": { type: "link", url: "mailto:tbuggybugster@gmail.com" },
+                            "location": {
+                                type: "render",
+                                words: ["dubai", "addis"],
+                                children: {
+                                    "dubai": { type: "link", url: "https://en.wikipedia.org/wiki/Dubai" },
+                                    "addis": { type: "link", url: "https://en.wikipedia.org/wiki/Addis_Ababa" }
+                                }
+                            },
+                            "social": {
+                                type: "render",
+                                words: ["linkedin", "github", "twitter", "stackoverflow"], 
+                                children: {
+                                    "linkedin": { type: "link", url: "https://linkedin.com/in/elijahma" },
+                                    "github": { type: "link", url: "https://github.com/0xecho" },
+                                    "twitter": { type: "link", url: "https://twitter.com/0xecho" },
+                                    "stackoverflow": { type: "link", url: "https://stackoverflow.com/users/12656190/elias-amha" },
+                                }
+                            }
+                        }
+                    },
+                    "summary": {
+                        type: "render",
+                        words: ["engineer", "developer", "maker", "breaker", "goofball", "intp", "bald"],
+                        children: {
+                            "engineer": { type: "link", url: "https://stackoverflow.com/users/12656190/elias-amha" },
+                            "developer": { type: "link", url: "https://eliasthe.dev" },
+                            "maker": { type: "link", url: "https://github.com/0xecho" },
+                            "breaker": { type: "link", url: "https://hackerone.com/oxecho" },
+                            "goofball": { type: "link", url: "https://t.me/oxecho" },
+                            "intp": { type: "link", url: "https://en.wikipedia.org/wiki/INTP" },
+                            "bald": {
+                                type: "function",
+                                function: () => {
+                                    const sampleImage = 'https://picsum.photos/200/300';
+                                    const modal = document.createElement('div');
+                                    modal.style.position = 'fixed';
+                                    modal.style.top = '0';
+                                    modal.style.left = '0';
+                                    modal.style.height = '100vh';
+                                    modal.style.width = '100vw';
+                                    modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+                                    modal.style.display = 'flex';
+                                    modal.style.zIndex = '9999';
+                                    
+                                    const image = document.createElement('img');
+                                    image.src = sampleImage;
+                                    image.style.margin = 'auto';
+                                    image.style.borderRadius = '8px';
+                                    image.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+                                    image.style.cursor = 'pointer';
+                                    image.style.transition = 'all 0.3s ease';
+                                    modal.addEventListener('click', () => modal.remove());
+
+                                    const subtitle = document.createElement('h2');
+                                    subtitle.textContent = 'For a full hair cycle, I was aerodynamically efficient.';
+                                    subtitle.style.position = 'absolute';
+                                    subtitle.style.bottom = '0';
+                                    subtitle.style.left = '0';
+                                    subtitle.style.width = '100%';
+                                    subtitle.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+                                    subtitle.style.color = 'white';
+                                    subtitle.style.textAlign = 'center';
+                                    subtitle.style.padding = '8px';
+
+                                    modal.appendChild(image);
+                                    modal.appendChild(subtitle);
+                                    document.body.appendChild(modal);
+                                }
+                            }
+                        }
+                    },
+                    "education": {
+                        type: "render",
+                        words: ["degree", "institution", "graduation"],
+                        children: {
+                            "degree": { type: "link", url: "https://en.wikipedia.org/wiki/Bachelor_of_Science_in_Computer_Science" },
+                            "institution": { type: "link", url: "https://en.wikipedia.org/wiki/Adama_Science_and_Technology_University" },
+                            "graduation": { type: "link", url: "https://en.wikipedia.org/wiki/Academic_degree" }
+                        }
+                    },
+                    "skills": {
+                        type: "render",
+                        words: ["technical", "soft.skills", "languages"],
+                        children: {
+                            "technical": {
+                                type: "render",
+                                words: ["programming", "tools", "frameworks", "cloud"],
+                                children: {
+                                    "programming": { type: "link", url: "https://en.wikipedia.org/wiki/Programming_language" },
+                                    "tools": { type: "link", url: "https://en.wikipedia.org/wiki/DevOps" },
+                                    "frameworks": { type: "link", url: "https://en.wikipedia.org/wiki/Web_framework" },
+                                    "cloud": { type: "link", url: "https://en.wikipedia.org/wiki/Cloud_computing" }
+                                }
+                            },
+                            "soft.skills": {
+                                type: "render",
+                                words: ["communication", "Efficiency", "eFficiency", "efFiciency"],
+                                children: {
+                                    "communication": { type: "link", url: "https://en.wikipedia.org/wiki/Communication_skill" },
+                                    "Efficiency": { type: "link", url: "https://www.youtube.com/watch?v=uoaD9GHSjb0" },
+                                    "eFficiency": { type: "link", url: "https://www.youtube.com/watch?v=uoaD9GHSjb0" },
+                                    "efFiciency": { type: "link", url: "https://www.youtube.com/watch?v=uoaD9GHSjb0" }
+                                }
+                            },
+                            "languages": {
+                                type: "render",
+                                words: ["english", "amharic"],
+                                children: {
+                                    "english": { type: "link", url: "https://en.wikipedia.org/wiki/English_language" },
+                                    "amharic": { type: "link", url: "https://en.wikipedia.org/wiki/Amharic" }
+                                }
+                            }
+                        }
+                    },
+                    "projects": {
+                        type: "render",
+                        words: ["gridy", "2048er", "deeveedee", "beiroot"],
+                        children: {
+                            "2048er": { type: "link", url: "https://github.com/0xecho/2048-er" },
+                            "gridy": { type: "link", url: "https://cybertalents.com/competitions/ethiopia-national-cybersecurity-ctf-2021/teams" },
+                            "deeveedee": { type: "link", url: "https://deeveedee.vercel.app/" },
+                            "beiroot": { type: "link", url: "https://beiroot.vercel.app/" }
+                        }
+                    },
+                    "cert's n awards": {
+                        type: "render",
+                        words: ["aws", "4xicpcfin", "1xicpcchamp", "2xctffin"],
+                        children: {
+                            "aws": { type: "link", url: "https://aws.amazon.com/certification/certified-developer-associate/" },
+                            "4xicpcfin": {
+                                type: "link",
+                                url: "https://drive.google.com/file/d/171VRq2ShmDP-77G25kv-YoBlRfLZy3nD/view"
+                            },
+                            "1xicpcchamp": {
+                                type: "link",
+                                url: "#"
+                            },
+                            "2xctffin": {
+                                type: "link",
+                                url: "https://cybertalents.com/competitions/ethiopia-national-cybersecurity-ctf-2021/teams"
+                            },
+                        }
+                    },
+                    "movies": {
+                        type: "render",
+                        words: ["monty", "infinity", "predestination", "smatsv", "thhgttg", "more"],
+                        children: {
+                            "monty.python": { type: "link", url: "https://en.wikipedia.org/wiki/Monty_Python" },
+                            "infinity.war": { type: "link", url: "https://en.wikipedia.org/wiki/Avengers:_Infinity_War" },
+                            "predestination": { type: "link", url: "https://en.wikipedia.org/wiki/Predestination_(film)" },
+                            "S.M.atsv": { type: "link", url: "https://en.wikipedia.org/wiki/Spider-Man:_Across_the_Spider-Verse" },
+                            "thhgttg": { type: "link", url: "https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy_(film)" },
+                            "View ALL": { type: "link", url: "https://www.flickchart.com/oxecho/movies" }
+                        }
+                    }
+                }
+            }
+        };
+
+        if(new URLSearchParams(window.location.search).get('isHacker')) {
+            pageGraph.root.children.resume = {
+                type: "link",
+                url: "https://drive.google.com/file/d/1mAIn0cG368o2vCnPBhNeoaMI3B4sx377/view?usp=drive_link",
+            }
+        }
+
+        let navigationHistory = [];
+
+        function createGrid(size) {
+            return Array(size).fill().map(() => Array(size).fill('_'));
+        }
+
+        function isAdjacent(grid, row, col, direction, length) {
+            const size = grid.length;
+            const checkCell = (r, c) => r >= 0 && r < size && c >= 0 && c < size && grid[r][c] !== '_';
+
+            const directions = {
+                horizontal: () => {
+                    for (let i = -1; i <= length; i++) {
+                        if (checkCell(row - 1, col + i) || checkCell(row + 1, col + i)) return true;
+                    }
+                    return checkCell(row, col - 1) || checkCell(row, col + length);
+                },
+                vertical: () => {
+                    for (let i = -1; i <= length; i++) {
+                        if (checkCell(row + i, col - 1) || checkCell(row + i, col + 1)) return true;
+                    }
+                    return checkCell(row - 1, col) || checkCell(row + length, col);
+                },
+                diagonal: () => {
+                    for (let i = -1; i <= length; i++) {
+                        if (checkCell(row + i - 1, col + i) || checkCell(row + i + 1, col + i) ||
+                            checkCell(row + i, col + i - 1) || checkCell(row + i, col + i + 1)) {
+                            return true;
+                        }
+                    }
+                    return checkCell(row - 1, col - 1) || checkCell(row + length, col + length);
+                }
+            };
+
+            return directions[direction]();
+        }
+
+        function canPlaceWord(grid, word, row, col, direction) {
+            const size = grid.length;
+            const wordLen = word.length;
+
+            const directions = {
+                horizontal: () => {
+                    if (col + wordLen > size) return false;
+                    for (let i = 0; i < wordLen; i++) {
+                        if (grid[row][col + i] !== '_' || isAdjacent(grid, row, col + i, direction, wordLen)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                },
+                vertical: () => {
+                    if (row + wordLen > size) return false;
+                    for (let i = 0; i < wordLen; i++) {
+                        if (grid[row + i][col] !== '_' || isAdjacent(grid, row + i, col, direction, wordLen)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                },
+                diagonal: () => {
+                    if (row + wordLen > size || col + wordLen > size) return false;
+                    for (let i = 0; i < wordLen; i++) {
+                        if (grid[row + i][col + i] !== '_' || isAdjacent(grid, row + i, col + i, direction, wordLen)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            };
+
+            return directions[direction]();
+        }
+
+        function placeWord(grid, word) {
+            const size = grid.length;
+            let attempts = 0;
+            const maxAttempts = 100;
+
+            while (attempts < maxAttempts) {
+                const row = Math.floor(Math.random() * size);
+                const col = Math.floor(Math.random() * size);
+                const direction = ['horizontal', 'vertical', 'diagonal'][Math.floor(Math.random() * 3)];
+
+                if (canPlaceWord(grid, word, row, col, direction)) {
+                    const directions = {
+                        horizontal: () => {
+                            for (let i = 0; i < word.length; i++) {
+                                grid[row][col + i] = word[i];
+                            }
+                        },
+                        vertical: () => {
+                            for (let i = 0; i < word.length; i++) {
+                                grid[row + i][col] = word[i];
+                            }
+                        },
+                        diagonal: () => {
+                            for (let i = 0; i < word.length; i++) {
+                                grid[row + i][col + i] = word[i];
+                            }
+                        }
+                    };
+
+                    directions[direction]();
+                    return { row, col, direction };
+                }
+
+                attempts++;
+            }
+
+            return null;
+        }
+
+        function generateWordSearch(words, size) {
+            const grid = createGrid(size);
+            const wordPositions = {};
+
+            words.forEach(word => {
+                const position = placeWord(grid, word.toUpperCase());
+                if (position) {
+                    if (!wordPositions[word]) {
+                        wordPositions[word] = [];
+                    }
+                    wordPositions[word].push(position);
+                } else {
+                    console.warn(`Warning: Couldn't place '${word}'`);
+                }
+            });
+
+            return { grid, wordPositions };
+        }
+
+        function getPage(pageKey) {
+            let page = pageGraph;
+            for (let key of navigationHistory) {
+                page = page[key].children;
+            }
+            return page[pageKey];
+        }
+
+        function renderWordSearch(container, pageKey = "root") {
+            let lastRequestId;
+            const page = getPage(pageKey);
+            if (!page) return;
+
+            container.innerHTML = '';
+            const words = Array.isArray(page.words) ? [...page.words] : [];
+
+            if (pageKey !== "root") {
+                words.push("back");
+            }
+
+            const gridSize = Math.max(20, Math.ceil(Math.sqrt(words.length * 10)));
+            const { grid, wordPositions } = generateWordSearch(words, gridSize);
+
+            const size = grid.length;
+            const cellSize = Math.min(container.clientWidth, container.clientHeight) / size;
+            const highlightedWords = [];
+
+            container.style.width = `${size * cellSize}px`;
+            container.style.height = `${size * cellSize}px`;
+            container.style.position = 'relative';
+            container.style.display = 'flex';
+            container.style.flexWrap = 'wrap';
+            container.style.justifyContent = 'center';
+
+            const letters = [];
+            const chars = [];
+
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    const letter = document.createElement('div');
+                    letter.className = 'letter';
+                    letter.style.width = `${cellSize}px`;
+                    letter.style.height = `${cellSize}px`;
+                    letter.style.fontSize = `${cellSize * 0.6}px`;
+                    letter.textContent = grid[i][j];
+                    container.appendChild(letter);
+
+                    if (grid[i][j] === '_') {
+                        letters.push({
+                            element: letter,
+                            x: j * cellSize + cellSize / 2,
+                            y: i * cellSize + cellSize / 2,
+                        });
+                    } else {
+                        chars.push({
+                            element: letter,
+                            x: j * cellSize + cellSize / 2,
+                            y: i * cellSize + cellSize / 2,
+                            movable: true,
+                            row: i,
+                            col: j,
+                        });
+                    }
+                }
+            }
+
+            const lastMousePosition = {};
+
+            function updateDirections(cursorX, cursorY) {
+                letters.forEach((letter) => {
+                    const dx = cursorX - letter.x;
+                    const dy = cursorY - letter.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const angle = Math.atan2(dy, dx);
+                    const fontSize = Math.max(cellSize * 0.3, cellSize * 0.6 - distance / 20);
+                    letter.element.style.transform = `rotate(${angle}rad)`;
+                    letter.element.style.fontSize = `${fontSize}px`;
+                });
+
+                chars.filter((letter) => letter.movable).forEach((letter) => {
+                    const dx = cursorX - letter.x;
+                    const dy = cursorY - letter.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const angle = Math.atan2(dy, dx);
+                    const fontSize = Math.max(cellSize * 0.3, cellSize * 0.6 - distance / 20);
+                    letter.element.style.transform = `rotate(${angle}rad)`;
+                    letter.element.style.fontSize = `${fontSize}px`;
+                    if (distance < cellSize) {
+                        letter.movable = false;
+                        letter.element.style.color = 'red';
+                        checkWordCompletion(letter.row, letter.col);
+                    }
+                });
+            }
+
+            function checkWordCompletion(row, col) {
+                Object.entries(wordPositions).forEach(([word, positions]) => {
+                    if(!words.includes(word)) return;
+                    positions.forEach(position => {
+                        if (isWordComplete(word, position) && !highlightedWords.includes(word)) {
+                            highlightedWords.push(word);
+                            highlightWord(word, position);
+                        }
+                    });
+                });
+            }
+
+            function isWordComplete(word, position) {
+                const { row, col, direction } = position;
+                for (let i = 0; i < word.length; i++) {
+                    let charPosition;
+                    if (direction === 'horizontal') {
+                        charPosition = chars.find(c => c.row === row && c.col === col + i);
+                    } else if (direction === 'vertical') {
+                        charPosition = chars.find(c => c.row === row + i && c.col === col);
+                    } else if (direction === 'diagonal') {
+                        charPosition = chars.find(c => c.row === row + i && c.col === col + i);
+                    }
+                    if (!charPosition || charPosition.movable) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function highlightWord(word, position) {
+                const { row, col, direction } = position;
+                const wordBox = document.createElement('div');
+                wordBox.className = 'word-box';
+                if (word === "back") {
+                    wordBox.classList.add('back');
+                }
+
+                const dimensions = {
+                    horizontal: { width: cellSize * word.length, height: cellSize, left: col * cellSize, top: row * cellSize },
+                    vertical: { width: cellSize, height: cellSize * word.length, left: col * cellSize, top: row * cellSize },
+                    diagonal: { width: cellSize * word.length, height: cellSize * word.length, left: col * cellSize, top: row * cellSize }
+                };
+
+                const { width, height, left, top } = dimensions[direction];
+
+                Object.assign(wordBox.style, {
+                    width: `${width}px`,
+                    height: `${height}px`,
+                    left: `${left}px`,
+                    top: `${top}px`
+                });
+
+                wordBox.addEventListener('click', () => {
+                    if (word === "back") {
+                        goBack();
+                    } else {
+                        const nextPage = page.children && page.children[word];
+                        if (nextPage) {
+                            if (nextPage.type === 'render') {
+                                navigationHistory.push(pageKey);
+                                cancelAnimationFrame(lastRequestId);
+                                renderWordSearch(container, word);
+                            } else if (nextPage.type === 'link') {
+                                window.open(nextPage.url, '_blank');
+                            } else if (nextPage.type === "function") {
+                                nextPage.function();
+                            }
+                        }
+                    }
+                });
+
+                container.appendChild(wordBox);
+            }
+
+            function goBack() {
+                if (navigationHistory.length > 0) {
+                    const previousPage = navigationHistory.pop();
+                    cancelAnimationFrame(lastRequestId);
+                    renderWordSearch(container, previousPage);
+                }
+            }
+
+            container.addEventListener('mousemove', (event) => {
+                const rect = container.getBoundingClientRect();
+                const mouseX = event.clientX - rect.left;
+                const mouseY = event.clientY - rect.top;
+                lastMousePosition.x = mouseX;
+                lastMousePosition.y = mouseY;                
+            });
+
+            function animate() {
+                if (lastMousePosition.x !== undefined && lastMousePosition.y !== undefined) {
+                    updateDirections(lastMousePosition.x, lastMousePosition.y);
+                } else {
+                    updateDirections(size * cellSize / 2, size * cellSize / 2);
+                }
+                lastRequestId = requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+
+        const container = document.getElementById('wordSearchContainer');
+        renderWordSearch(container);
+    </script>
+</body>
+
+</html>
