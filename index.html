@@ -554,13 +554,26 @@
                 }
             }
 
-            container.addEventListener('mousemove', (event) => {
+            function handleInteraction(event) {
                 const rect = container.getBoundingClientRect();
-                const mouseX = event.clientX - rect.left;
-                const mouseY = event.clientY - rect.top;
-                lastMousePosition.x = mouseX;
-                lastMousePosition.y = mouseY;                
-            });
+                let interactionX, interactionY;
+
+                if (event.type === 'mousemove') {
+                    interactionX = event.clientX - rect.left;
+                    interactionY = event.clientY - rect.top;
+                } else if (event.type === 'touchmove') {
+                    event.preventDefault();
+                    interactionX = event.touches[0].clientX - rect.left;
+                    interactionY = event.touches[0].clientY - rect.top;
+                }
+
+                lastPosition = { x: interactionX, y: interactionY };
+            }
+
+            container.addEventListener('mousemove', handleInteraction);
+            container.addEventListener('touchstart', handleInteraction, { passive: false });
+            container.addEventListener('touchmove', handleInteraction, { passive: false });
+
 
             function animate() {
                 if (lastMousePosition.x !== undefined && lastMousePosition.y !== undefined) {
