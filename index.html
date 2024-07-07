@@ -964,12 +964,20 @@
             container.addEventListener('touchmove', handleInteraction, { passive: false });
 
 
-            function animate() {
+            // function animate() {
+            //     if (lastPosition.x !== undefined && lastPosition.y !== undefined) {
+            //         updateDirections(lastPosition.x, lastPosition.y);
+            //     } else {
+            //         updateDirections(size * cellSize / 2, size * cellSize / 2);
+            //     }
+            const FPS = 25;
+            let timer = setInterval(() => {
+                console.log('Animating', lastPosition);
                 if (lastPosition.x !== undefined && lastPosition.y !== undefined) {
                     updateDirections(lastPosition.x, lastPosition.y);
                 } else {
                     updateDirections(size * cellSize / 2, size * cellSize / 2);
-                }
+                }                
             }, 1000 / FPS);
 
             toMakeItWorkDontJudge.push(timer);
