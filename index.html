@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
+<title>Impromptu Portfolio</title>
 
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             width: 100vw;
         }
 
-        #wordSearchContainer {
+        #gridContainer {
             position: fixed;
             top: 0;
             left: 0;
@@ -21,6 +24,49 @@
             justify-content: center;
             align-items: center;
             margin: auto;
+        }
+
+        #wordSearch {
+            padding: 10px;
+            display: flex;
+            border: 2px solid #080808;
+            border-radius: 15px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: auto;
+            padding: 10px;
+            overflow: visible;
+        }
+
+        .header {
+            text-align: center;
+            max-width: 65rem;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.75rem;
+        }
+
+        h2 {
+            display: inline;
+            color: #4CAF50;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            gap: 20px;
         }
 
         .letter {
@@ -49,57 +95,197 @@
             background-color: rgba(255, 0, 0, 0.1);
             border-color: #f44336;
         }
+
+        .button {
+            background-color: #ff6b6b;
+            color: white;
+            border: 3px solid black;
+            padding: 5px 10px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .button:hover {
+            box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+            transform: translate(2px, 2px);
+        }
+
+        #wordSearch {
+            max-width: 60%;
+        }
+        #triviaContainer {
+            width: 25%;
+        }
+        .foundPages{
+            width: 15%;
+        }
+
+        .foundPages, #wordSearch, #triviaContainer  {
+            background-color: white;
+            padding: 20px;
+            border: 4px solid black;
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+            transition: box-shadow 0.2s, transform 0.2s;
+            text-align: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .foundPages:hover, #wordSearch:hover, #triviaContainer:hover {
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+            transform: translate(4px, 4px);
+        }
+
+        #foundPagesList {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        #foundPagesList li {
+            margin-bottom: 5px;
+            cursor: pointer;
+            padding: 5px;
+            background-color: #f0f0f0;
+            border: 2px solid black;
+            transition: background-color 0.2s;
+            list-style: none;
+        }
+        #foundPagesList li:hover {
+            background-color: #e0e0e0;
+        }
+        #foundPagesList ul {
+            margin-left: 20px;
+        }
+
+        #triviaList li {
+            font-size: 0.8rem;
+            font-weight: 800;
+            opacity: 0.5;
+            transition: font-size 0.2s, opacity 0.2s;
+            list-style: none;
+            padding-top: 25px;
+        }
+        #triviaList li:last-child {
+            font-size: 1.5rem;
+            font-weight: 700;
+            opacity: 1;
+        }
+        #triviaList li:nth-last-child(2) {
+            font-size: 1.2rem;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+        #triviaList li:nth-last-child(3) {
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.6;
+        }
+        #triviaList li:nth-last-child(4) {
+            font-size: 0.9rem;
+            font-weight: 400;
+            opacity: 0.5;
+        }
+        #triviaList li:hover {
+            font-size: 1.5rem;
+            font-weight: 700;
+            opacity: 1;
+        }
     </style>
 </head>
 
 <body>
-    <div id="wordSearchContainer"></div>
+    <div class="container">
+        <div class="header">
+            <h1>Rapidly build modern websites without ever leaving your HTML.</h1>
+
+            <span>
+                <a target="_blank"
+                    href="https://drive.google.com/file/d/1mAIn0cG368o2vCnPBhNeoaMI3B4sx377/view?usp=drive_link">Here
+                    for the treats, not the tricks? <h2>Check out my regular "big boy" resume here</h2></a>.
+            </span>
+        </div>
+        <div class="row">
+            <div class="foundPages">
+                <h2>Found Pages:</h2>
+                <button class="button" onclick="clearProgress()">x</button>
+                <ul id="foundPagesList">
+                </ul>
+            </div>
+            <div id="wordSearch">
+                <div id="gridContainer"></div>
+            </div>
+            <div id="triviaContainer">
+                <h2>Did You Know?</h2>
+                <ul id="triviaList"></ul>
+            </div>
+        </div>
+
+    </div>
 
     <script>
-        function welcome() {
-            alert("Welcome to das portfolio! If you are reading this, you probably know what to do!.")
-        }
+        const toMakeItWorkDontJudge = [];
+        let triviaFacts = [
+            "Elias is a Full-Stack Software Engineer with over 5 years of experience.",
+            "Elias has worked for companies like ADSDroid, FL0, and Addis Software.",
+            "Elias holds an AWS Certified Developer - Associate certification.",
+            "Elias graduated from Adama Science and Technology University with a B.Sc. in Computer Science and Engineering.",
+            "Elias's GPA was 3.44 overall, with a major GPA of 3.61.",
+            "Elias has experience with Python, JavaScript, Django, and React.",
+            "Elias has contributed to acquiring new clients by developing MVPs with over a 90% success rate.",
+            "Elias developed a proprietary suggestion engine that improved user engagement and conversion metrics.",
+            "Elias has worked as a freelance software engineer on Upwork since 2021.",
+            "Elias has participated in and won medals in several programming contests.",
+            "Elias won a Gold Medal in the Ethiopian Collegiate Programming Contest in 2018.",
+            "Elias secured second place in the Ethiopian National Cyber-Security CTF in 2021.",
+            "Elias is proficient in both English and Amharic languages.",
+            "Elias's interests include Cyber Security, Movies, and Cooking.",
+            "Elias has developed projects like Beiroot, 2048'er, and Gridy.",
+            "Elias has experience with AWS Serverless technologies.",
+            "Elias has skills in Docker, Kubernetes, Grafana, and Prometheus.",
+            "Elias enjoys long walks as one of his hobbies.",
+            "Elias has a sense of humor, listing 'Not knowing when to stop' as one of his interests.",
+            "Elias has experience in both Relational (MySQL, PostgreSQL) and Non-Relational (MongoDB) databases."
+        ];
         const pageGraph = {
             "root": {
                 type: "render",
-                words: ["contact", "summary", "education", "skills", "projects", "cert's n awards", "movies", "0xecho", "elias's portfolio", "echo"],
+                words: ["contact", "summary", "education", "skills", "experience", "projects", "certifications", "awards", "languages", "interests", "references", "movies", "0xecho"],
                 children: {
-                    "echo": {
-                        type: "function",
-                        function: welcome
-                    },
                     "0xecho": { type: "function", function: welcome },
-                    "elias's portfolio": { type: "function", function: welcome },
                     "contact": {
                         type: "render",
                         words: ["name", "email", "location", "social"],
                         children: {
                             "name": { type: "link", url: "https://en.wikipedia.org/wiki/Elias" },
-                            "email": { type: "link", url: "mailto:tbuggybugster@gmail.com" },
+                            "email": { type: "link", url: "mailto:elias.amhat@gmail.com" },
                             "location": {
                                 type: "render",
-                                words: ["dubai", "addis"],
+                                words: ["dubai", "uae"],
                                 children: {
                                     "dubai": { type: "link", url: "https://en.wikipedia.org/wiki/Dubai" },
-                                    "addis": { type: "link", url: "https://en.wikipedia.org/wiki/Addis_Ababa" }
+                                    "uae": { type: "link", url: "https://en.wikipedia.org/wiki/United_Arab_Emirates" }
                                 }
                             },
                             "social": {
                                 type: "render",
-                                words: ["linkedin", "github", "twitter", "stackoverflow"], 
+                                words: ["linkedin", "github", "twitter", "stackoverflow", "hackerone", "gitlab", "blog"],
                                 children: {
                                     "linkedin": { type: "link", url: "https://linkedin.com/in/elijahma" },
                                     "github": { type: "link", url: "https://github.com/0xecho" },
                                     "twitter": { type: "link", url: "https://twitter.com/0xecho" },
                                     "stackoverflow": { type: "link", url: "https://stackoverflow.com/users/12656190/elias-amha" },
+                                    "hackerone": { type: "link", url: "https://hackerone.com/oxecho" },
+                                    "gitlab": { type: "link", url: "https://gitlab.com/0xecho" },
+                                    "blog": { type: "link", url: "https://eliasthe.dev" }
                                 }
                             }
                         }
                     },
                     "summary": {
                         type: "render",
-                        words: ["engineer", "developer", "maker", "breaker", "goofball", "intp", "bald"],
+                        words: ["fullstack", "engineer", "developer", "maker", "breaker", "goofball", "intp", "bald", "experience"],
                         children: {
+                            "fullstack": { type: "link", url: "https://en.wikipedia.org/wiki/Full-stack_developer" },
                             "engineer": { type: "link", url: "https://stackoverflow.com/users/12656190/elias-amha" },
                             "developer": { type: "link", url: "https://eliasthe.dev" },
                             "maker": { type: "link", url: "https://github.com/0xecho" },
@@ -119,7 +305,7 @@
                                     modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
                                     modal.style.display = 'flex';
                                     modal.style.zIndex = '9999';
-                                    
+
                                     const image = document.createElement('img');
                                     image.src = sampleImage;
                                     image.style.margin = 'auto';
@@ -143,80 +329,170 @@
                                     modal.appendChild(image);
                                     modal.appendChild(subtitle);
                                     document.body.appendChild(modal);
-                                }
-                            }
+                                },
+                            },
                         }
                     },
                     "education": {
                         type: "render",
-                        words: ["degree", "institution", "graduation"],
+                        words: ["degree", "institution", "graduated.2022", "gpa.3.61"],
                         children: {
-                            "degree": { type: "link", url: "https://en.wikipedia.org/wiki/Bachelor_of_Science_in_Computer_Science" },
-                            "institution": { type: "link", url: "https://en.wikipedia.org/wiki/Adama_Science_and_Technology_University" },
-                            "graduation": { type: "link", url: "https://en.wikipedia.org/wiki/Academic_degree" }
+                            "degree": { type: "link", url: "https://en.wikipedia.org/wiki/Bachelor_of_Science_in_Computer_Science", },
+                            "institution": { type: "link", url: "https://en.wikipedia.org/wiki/Adama_Science_and_Technology_University", },
+                            "graduated.2022": { type: "link", url: "#"},
+                            "gpa.3.61": { type: "link", url: "#"},
                         }
                     },
                     "skills": {
                         type: "render",
-                        words: ["technical", "soft.skills", "languages"],
+                        words: ["technical", "soft.skills", "languages", "frameworks", "databases", "cloud", "devops"],
                         children: {
                             "technical": {
                                 type: "render",
-                                words: ["programming", "tools", "frameworks", "cloud"],
+                                words: ["python", "javascript", "django", "react", "express", "docker", "kubernetes"],
                                 children: {
-                                    "programming": { type: "link", url: "https://en.wikipedia.org/wiki/Programming_language" },
-                                    "tools": { type: "link", url: "https://en.wikipedia.org/wiki/DevOps" },
-                                    "frameworks": { type: "link", url: "https://en.wikipedia.org/wiki/Web_framework" },
-                                    "cloud": { type: "link", url: "https://en.wikipedia.org/wiki/Cloud_computing" }
+                                    "python": { type: "link", url: "https://www.python.org/" },
+                                    "javascript": { type: "link", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+                                    "django": { type: "link", url: "https://www.djangoproject.com/" },
+                                    "react": { type: "link", url: "https://reactjs.org/" },
+                                    "express": { type: "link", url: "https://expressjs.com/" },
+                                    "docker": { type: "link", url: "https://www.docker.com/" },
+                                    "kubernetes": { type: "link", url: "https://kubernetes.io/" }
                                 }
                             },
                             "soft.skills": {
                                 type: "render",
-                                words: ["communication", "Efficiency", "eFficiency", "efFiciency"],
+                                words: ["communication", "problem.solving", "teamwork", "efficiency", "Efficiency", "EFFICIENCY"],
                                 children: {
                                     "communication": { type: "link", url: "https://en.wikipedia.org/wiki/Communication_skill" },
+                                    "problem.solving": { type: "link", url: "https://en.wikipedia.org/wiki/Problem_solving" },
+                                    "teamwork": { type: "link", url: "https://en.wikipedia.org/wiki/Teamwork" },
+                                    "efficiency": { type: "link", url: "https://www.youtube.com/watch?v=uoaD9GHSjb0" },
                                     "Efficiency": { type: "link", url: "https://www.youtube.com/watch?v=uoaD9GHSjb0" },
-                                    "eFficiency": { type: "link", url: "https://www.youtube.com/watch?v=uoaD9GHSjb0" },
-                                    "efFiciency": { type: "link", url: "https://www.youtube.com/watch?v=uoaD9GHSjb0" }
+                                    "EFFICIENCY": { type: "link", url: "https://www.youtube.com/watch?v=uoaD9GHSjb0" }
                                 }
                             },
-                            "languages": {
+                            "frameworks": {
                                 type: "render",
-                                words: ["english", "amharic"],
+                                words: ["django", "react.js", "express.js", "vue.js"],
                                 children: {
-                                    "english": { type: "link", url: "https://en.wikipedia.org/wiki/English_language" },
-                                    "amharic": { type: "link", url: "https://en.wikipedia.org/wiki/Amharic" }
+                                    "django": { type: "link", url: "https://www.djangoproject.com/" },
+                                    "react.js": { type: "link", url: "https://reactjs.org/" },
+                                    "express.js": { type: "link", url: "https://expressjs.com/" },
+                                    "vue.js": { type: "link", url: "https://vuejs.org/" }
+                                }
+                            },
+                            "databases": {
+                                type: "render",
+                                words: ["mysql", "postgresql", "mongodb", "redis"],
+                                children: {
+                                    "mysql": { type: "link", url: "https://www.mysql.com/" },
+                                    "postgresql": { type: "link", url: "https://www.postgresql.org/" },
+                                    "mongodb": { type: "link", url: "https://www.mongodb.com/" },
+                                    "redis": { type: "link", url: "https://redis.io/" }
+                                }
+                            },
+                            "cloud": {
+                                type: "render",
+                                words: ["aws", "serverless"],
+                                children: {
+                                    "aws": { type: "link", url: "https://aws.amazon.com/" },
+                                    "serverless": { type: "link", url: "https://aws.amazon.com/serverless/" }
+                                }
+                            },
+                            "devops": {
+                                type: "render",
+                                words: ["docker", "kubernetes", "grafana", "prometheus"],
+                                children: {
+                                    "docker": { type: "link", url: "https://www.docker.com/" },
+                                    "kubernetes": { type: "link", url: "https://kubernetes.io/" },
+                                    "grafana": { type: "link", url: "https://grafana.com/" },
+                                    "prometheus": { type: "link", url: "https://prometheus.io/" }
                                 }
                             }
                         }
                     },
-                    "projects": {
+                    "experience": {
                         type: "render",
-                        words: ["gridy", "2048er", "deeveedee", "beiroot"],
+                        words: ["adsdroid.2023-present", "fl0.2021-2023", "addis.software.2022-2023", "upwork.2021-2023", "tcs.2019-2021"],
                         children: {
-                            "2048er": { type: "link", url: "https://github.com/0xecho/2048-er" },
-                            "gridy": { type: "link", url: "https://cybertalents.com/competitions/ethiopia-national-cybersecurity-ctf-2021/teams" },
-                            "deeveedee": { type: "link", url: "https://deeveedee.vercel.app/" },
-                            "beiroot": { type: "link", url: "https://beiroot.vercel.app/" }
+                            "adsdroid.2023-present": { type: "none"},
+                            "fl0.2021-2023": { type: "none"},
+                            "addis.software.2022-2023": { type: "none"},
+                            "upwork.2021-2023": { type: "none"},
+                            "tcs.2019-2021": { type: "none" }
                         }
                     },
-                    "cert's n awards": {
+                    "projects": {
                         type: "render",
-                        words: ["aws", "4xicpcfin", "1xicpcchamp", "2xctffin"],
+                        words: ["beiroot", "2048er", "gridy", "color.sort.solver", "meme.ranker", "toppicks", "why.because", "dumb.db", "live.profile.changer"],
                         children: {
-                            "aws": { type: "link", url: "https://aws.amazon.com/certification/certified-developer-associate/" },
-                            "4xicpcfin": {
-                                type: "link",
-                                url: "https://drive.google.com/file/d/171VRq2ShmDP-77G25kv-YoBlRfLZy3nD/view"
+                            "beiroot": { type: "link", url: "https://beiroot.vercel.app/", },
+                            "2048er": { type: "link", url: "https://github.com/0xecho/2048-er", },
+                            "gridy": { type: "link", url: "https://eliasthe.dev/gridy/dist/#/", },
+                            "color.sort.solver": { type: "link", url: "https://github.com/0xecho?tab=repositories", },
+                            "meme.ranker": { type: "link", url: "https://github.com/0xecho?tab=repositories", },
+                            "toppicks": { type: "link", url: "https://github.com/0xecho?tab=repositories", },
+                            "why.because": { type: "link", url: "https://github.com/0xecho?tab=repositories", },
+                            "dumb.db": { type: "link", url: "https://github.com/0xecho?tab=repositories", },
+                            "live.profile.changer": { type: "link", url: "https://github.com/0xecho?tab=repositories",  }
+                        }
+                    },
+                    "certifications": {
+                        type: "render",
+                        words: ["aws"],
+                        children: {
+                            "aws": { type: "link", url: "https://www.credly.com/badges/d902577c-c59d-491a-bb40-d1a85a380485",}
+                        }
+                    },
+                    "awards": {
+                        type: "render",
+                        words: ["icpc", "ctf"],
+                        children: {
+                            "icpc": {
+                                type: "render",
+                                words: ["gold", "silver", "bronze"],
+                                children: {
+                                    "gold": { type: "link", url: "#", text: "ECPC 2018 Gold Medalist" },
+                                    "silver": { type: "link", url: "#", text: "ECPC 2020 Silver Medalist" },
+                                    "bronze": { type: "link", url: "#", text: "ECPC 2021 & ICPC South Africa 2019 Bronze Medalist" }
+                                }
                             },
-                            "1xicpcchamp": {
-                                type: "link",
-                                url: "#"
-                            },
-                            "2xctffin": {
-                                type: "link",
-                                url: "https://cybertalents.com/competitions/ethiopia-national-cybersecurity-ctf-2021/teams"
-                            },
+                            "ctf": {
+                                type: "render",
+                                words: ["second", "third"],
+                                children: {
+                                    "second": { type: "link", url: "#", text: "Ethiopian National Cyber-Security CTF 2021 - Second Place" },
+                                    "third": { type: "link", url: "#", text: "Ethiopian National Cyber-Security CTF 2020 - Third Place" }
+                                }
+                            }
+                        }
+                    },
+                    "languages": {
+                        type: "render",
+                        words: ["english", "amharic"],
+                        children: {
+                            "english": { type: "link", url: "https://en.wikipedia.org/wiki/English_language" },
+                            "amharic": { type: "link", url: "https://en.wikipedia.org/wiki/Amharic" }
+                        }
+                    },
+                    "interests": {
+                        type: "render",
+                        words: ["cybersecurity", "movies", "coding", "cooking", "walking"],
+                        children: {
+                            "cybersecurity": { type: "link", url: "#", text: "Cyber Security" },
+                            "movies": { type: "link", url: "#", text: "Movies" },
+                            "coding": { type: "link", url: "#", text: "Coding for Fun and Profit" },
+                            "cooking": { type: "link", url: "#", text: "Cooking" },
+                            "walking": { type: "link", url: "#", text: "Long Walks" }
+                        }
+                    },
+                    "references": {
+                        type: "render",
+                        words: ["james", "temkin"],
+                        children: {
+                            "james": { type: "link", url: "#", text: "James Harrison, Solution Architect, FL0" },
+                            "temkin": { type: "link", url: "#", text: "Temkin Mengistu, Lead Developer, Infonas" }
                         }
                     },
                     "movies": {
@@ -235,9 +511,13 @@
                     }
                 }
             }
-        };
+        }
+        let foundPages = ['root'];
+        let lastRequestId;
 
-        if(new URLSearchParams(window.location.search).get('isHacker')) {
+
+        loadProgress();
+        if (new URLSearchParams(window.location.search).get('isHacker')) {
             pageGraph.root.children.resume = {
                 type: "link",
                 url: "https://drive.google.com/file/d/1mAIn0cG368o2vCnPBhNeoaMI3B4sx377/view?usp=drive_link",
@@ -245,7 +525,87 @@
             pageGraph.root.words.push("resume");
         }
 
-        let navigationHistory = [];
+        function welcome() {
+            alert("Welcome to das portfolio! If you are reading this, you probably know what to do!.")
+        }
+        function loadProgress() {
+            const savedProgress = localStorage.getItem('wordSearchProgress');
+            if (savedProgress) {
+                try {
+                    foundPages = JSON.parse(savedProgress);
+                } catch (e) {
+                    console.error('Error loading progress:', e);
+                    localStorage.removeItem('wordSearchProgress');
+                    foundPages = ['root'];
+                }
+            }
+            renderFoundPages();
+        }
+        function saveProgress() {
+            localStorage.setItem('wordSearchProgress', JSON.stringify(foundPages));
+        }
+
+        function clearProgress() {
+            localStorage.removeItem('wordSearchProgress');
+            foundPages = ['root'];
+            renderFoundPages();
+        }
+
+        function displayRandomTrivia() {
+            const triviaList = document.getElementById('triviaList');
+            const randomTrivia = triviaFacts[Math.floor(Math.random() * triviaFacts.length)];
+            const triviaItem = document.createElement('li');
+            triviaItem.textContent = randomTrivia;
+            triviaList.append(triviaItem);
+            while (triviaList.children.length > 5) {
+                triviaList.removeChild(triviaList.lastChild);
+            }
+        }
+
+        function foundAPage(page) {
+            if (!foundPages.includes(page)) {
+                foundPages.push(page);
+                saveProgress();
+                renderFoundPages();
+                displayRandomTrivia();
+            }
+        }
+
+        function renderFoundPages() {
+            const tree = {};
+            function traverse(page, tree, _pageGraph = pageGraph) {
+                if (foundPages.includes(page) || page === 'root') {
+                    tree[page] = {};
+                    if (_pageGraph[page].children) {
+                        for (let child of Object.keys(_pageGraph[page].children)) {
+                            traverse(child, tree[page], _pageGraph[page].children);
+                        }
+                    }
+                }
+            }
+            traverse('root', tree);
+
+            const list = document.getElementById('foundPagesList');
+            list.innerHTML = '';
+            function renderTraverse(tree, parent) {
+                for (let page of Object.keys(tree)) {
+                    const item = document.createElement('li');
+                    item.textContent = page;
+                    item.style.cursor = 'pointer';
+                    item.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        processClick(getPage(page), page);
+                    });
+                    parent.appendChild(item);
+                    if (Object.keys(tree[page]).length > 0) {
+                        const sublist = document.createElement('ul');
+                        item.appendChild(sublist);
+                        renderTraverse(tree[page], sublist);
+                    }
+                }
+            }
+            renderTraverse(tree, list);
+        }
 
         function createGrid(size) {
             return Array(size).fill().map(() => Array(size).fill('_'));
@@ -362,6 +722,8 @@
             const grid = createGrid(size);
             const wordPositions = {};
 
+            words = words.sort((a, b) => b.length - a.length);
+
             words.forEach(word => {
                 const position = placeWord(grid, word.toUpperCase());
                 if (position) {
@@ -378,17 +740,42 @@
         }
 
         function getPage(pageKey) {
-            let page = pageGraph;
-            for (let key of navigationHistory) {
-                page = page[key].children;
+            function traverse(pageKey, _pageGraph = pageGraph) {
+                if (_pageGraph[pageKey]) {
+                    return _pageGraph[pageKey];
+                }
+                for (let child of Object.keys(_pageGraph)) {
+                    if (_pageGraph[child].children) {
+                        const result = traverse(pageKey, _pageGraph[child].children);
+                        if (result) return result;
+                    }
+                }
+                return null;
             }
-            return page[pageKey];
+
+            return traverse(pageKey);
+        }
+
+        function processClick(page, pageKey) {
+            cancelAnimationFrame(lastRequestId);
+            lastRequestId = null;
+
+            if (page.type === 'render') {
+                renderWordSearch(container, pageKey);
+            } else if (page.type === 'link') {
+                window.open(page.url, '_blank');
+            } else if (page.type === "function") {
+                page.function();
+            }
         }
 
         function renderWordSearch(container, pageKey = "root") {
-            let lastRequestId;
             const page = getPage(pageKey);
             if (!page) return;
+
+            if (toMakeItWorkDontJudge.length) {
+                toMakeItWorkDontJudge.forEach(timer => clearInterval(timer));
+            }
 
             container.innerHTML = '';
             const words = Array.isArray(page.words) ? [...page.words] : [];
@@ -397,11 +784,13 @@
                 words.push("back");
             }
 
-            const gridSize = Math.max(20, Math.ceil(Math.sqrt(words.length * 10)));
+            const gridSize = Math.max(23, Math.ceil(Math.sqrt(words.length * 10)));
             const { grid, wordPositions } = generateWordSearch(words, gridSize);
 
+            const allowedHeight = window.innerHeight * 0.8;
+
             const size = grid.length;
-            const cellSize = Math.min(container.clientWidth, container.clientHeight) / size;
+            const cellSize = Math.floor(Math.min(container.clientWidth, allowedHeight) / size)
             const highlightedWords = [];
 
             container.style.width = `${size * cellSize}px`;
@@ -421,6 +810,7 @@
                     letter.style.width = `${cellSize}px`;
                     letter.style.height = `${cellSize}px`;
                     letter.style.fontSize = `${cellSize * 0.6}px`;
+                    letter.style.fontWeight = '200';
                     letter.textContent = grid[i][j];
                     container.appendChild(letter);
 
@@ -431,6 +821,7 @@
                             y: i * cellSize + cellSize / 2,
                         });
                     } else {
+                        letter.style.fontWeight = '500';
                         chars.push({
                             element: letter,
                             x: j * cellSize + cellSize / 2,
@@ -456,25 +847,25 @@
                     letter.element.style.fontSize = `${fontSize}px`;
                 });
 
-                chars.filter((letter) => letter.movable).forEach((letter) => {
-                    const dx = cursorX - letter.x;
-                    const dy = cursorY - letter.y;
+                chars.filter((char) => char.movable).forEach((char) => {
+                    const dx = cursorX - char.x;
+                    const dy = cursorY - char.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
                     const angle = Math.atan2(dy, dx);
                     const fontSize = Math.max(cellSize * 0.3, cellSize * 0.6 - distance / 20);
-                    letter.element.style.transform = `rotate(${angle}rad)`;
-                    letter.element.style.fontSize = `${fontSize}px`;
+                    char.element.style.transform = `rotate(${angle * 0.1}rad)`;
+                    char.element.style.fontSize = `${fontSize}px`;
                     if (distance < cellSize) {
-                        letter.movable = false;
-                        letter.element.style.color = 'red';
-                        checkWordCompletion(letter.row, letter.col);
+                        char.movable = false;
+                        char.element.style.color = 'red';
+                        checkWordCompletion(char.row, char.col);
                     }
                 });
             }
 
             function checkWordCompletion(row, col) {
                 Object.entries(wordPositions).forEach(([word, positions]) => {
-                    if(!words.includes(word)) return;
+                    if (!words.includes(word)) return;
                     positions.forEach(position => {
                         if (isWordComplete(word, position) && !highlightedWords.includes(word)) {
                             highlightedWords.push(word);
@@ -526,32 +917,28 @@
                 });
 
                 wordBox.addEventListener('click', () => {
+                    console.log('Clicked:', word, position);
                     if (word === "back") {
-                        goBack();
+                        goBack(pageKey);
                     } else {
                         const nextPage = page.children && page.children[word];
                         if (nextPage) {
-                            if (nextPage.type === 'render') {
-                                navigationHistory.push(pageKey);
-                                cancelAnimationFrame(lastRequestId);
-                                renderWordSearch(container, word);
-                            } else if (nextPage.type === 'link') {
-                                window.open(nextPage.url, '_blank');
-                            } else if (nextPage.type === "function") {
-                                nextPage.function();
-                            }
+                            processClick(nextPage, word, lastRequestId);
                         }
                     }
                 });
 
                 container.appendChild(wordBox);
+
+                foundAPage(word);
             }
 
-            function goBack() {
-                if (navigationHistory.length > 0) {
-                    const previousPage = navigationHistory.pop();
-                    cancelAnimationFrame(lastRequestId);
-                    renderWordSearch(container, previousPage);
+            function goBack(fromPage) {
+                const parentPage = getPage(fromPage);
+                if (parentPage && parentPage.type === 'render') {
+                    renderWordSearch(container, 'root');
+                } else if (parentPage && parentPage.type === 'link') {
+                    window.open(parentPage.url, '_blank');
                 }
             }
 
@@ -583,14 +970,15 @@
                 } else {
                     updateDirections(size * cellSize / 2, size * cellSize / 2);
                 }
-                lastRequestId = requestAnimationFrame(animate);
-            }
+            }, 1000 / FPS);
 
-            animate();
+            toMakeItWorkDontJudge.push(timer);
         }
 
-        const container = document.getElementById('wordSearchContainer');
+
+        const container = document.getElementById('gridContainer');
         renderWordSearch(container);
+        displayRandomTrivia();
     </script>
 </body>
 
